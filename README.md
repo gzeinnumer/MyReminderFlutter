@@ -429,7 +429,7 @@ class PostBloc extends Bloc<PostEvent, PostState>{
 }
 ```
 
-- Type 2
+- Type 2 (like) Base Resources
 ```dart
 class PostState {
   final List<Object> list;
