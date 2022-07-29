@@ -260,7 +260,7 @@ BlocProvider.of<PostBloc>(context).add(PullToRefreshEvent())
 context.read<PostBloc>().add(PullToRefreshEvent())
 ```
 
-#### Cubit To Bloc
+#### Cubit To Bloc - List
 
 - Provider
 
@@ -277,7 +277,7 @@ return MaterialApp(
 ```
 
 Bloc
-```
+```dart
 return MaterialApp(
   home: MultiBlocProvider(
     providers: [
