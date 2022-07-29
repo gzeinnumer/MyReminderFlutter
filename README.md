@@ -248,15 +248,15 @@ body: BlocBuilder<PostCubit, List<Post>>(builder: (context, res) {
 ```
 
 #### Exception
-```
+```dart
 throw Exception('failed log in');
 ```
 
 #### Use Again Bloc add
-```
+```dart
 BlocProvider.of<PostBloc>(context).add(PullToRefreshEvent())
 ```
-```
+```dart
 context.read<PostBloc>().add(PullToRefreshEvent())
 ```
 
