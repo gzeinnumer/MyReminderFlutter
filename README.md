@@ -388,6 +388,90 @@ body: BlocBuilder<PostBloc, PostState>(builder: (context, state) {
 }),
 ```
 
+#### State Bloc Style
+
+- Type 1
+```dart
+abstract class PostState{}
+
+class LoadingPostState extends PostState{}
+
+class LoadedPostState extends PostState{
+  final List<Post> list;
+
+  LoadedPostState(this.list);
+}
+
+class FailedToLoadPostState extends PostState{
+  final Error exception;
+
+  FailedToLoadPostState(this.exception);
+}
+```
+```dart
+class PostBloc extends Bloc<PostEvent, PostState>{
+  final _dataService = DataService();
+
+  PostBloc() : super(LoadingPostState());
+
+  @override
+  Stream<PostState> mapEventToState(PostEvent event) async* {
+    if(event is LoadPostEvent || event is PullToRefreshEvent){
+      yield LoadingPostState();
+      try{
+        final res = await _dataService.getPosts();
+        yield LoadedPostState(res);
+      } on Error catch(e){
+        yield FailedToLoadPostState(e);
+      }
+    }
+  }
+}
+```
+
+- Type 2
+```dart
+class PostState {
+  final List<Object> list;
+  final ExampleStatus formStatus;
+
+  PostState({
+    this.list = const [],
+    this.formStatus = const ExampleInit(),
+  });
+
+  PostState copyWith({
+    List<Object>? list,
+    ExampleStatus? formStatus,
+  }) {
+    return PostState(
+      list: list ?? this.list,
+      formStatus: formStatus ?? this.formStatus,
+    );
+  }
+}
+```
+```dart
+class ExampleBloc extends Bloc<ExampleEvent, PostState> {
+
+  ExampleBloc() : super(PostState());
+
+  @override
+  Stream<PostState> mapEventToState(ExampleEvent event) async* {
+    if (event is ExampleChanged) {
+      yield state.copyWith(list: event.list);
+    } else if (event is ExampleSubmitted) {
+      yield state.copyWith(formStatus: ExampleOnShowLoading());
+      try {
+        yield state.copyWith(formStatus: ExampleOnSuccess());
+      } on Exception catch (e) {
+        yield state.copyWith(formStatus: ExampleOnFailed(e));
+      }
+    }
+  }
+}
+```
+
 
 ---
 
