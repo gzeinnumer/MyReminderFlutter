@@ -262,7 +262,7 @@ context.read<PostBloc>().add(PullToRefreshEvent())
 
 #### Cubit To Bloc - List
 - Provider
-  - Cubit
+Cubit
 ```dart
 return MaterialApp(
   home: MultiBlocProvider(
@@ -273,7 +273,7 @@ return MaterialApp(
   ),
 );
 ```
-  - Bloc
+Bloc
 ```dart
 return MaterialApp(
   home: MultiBlocProvider(
@@ -286,7 +286,8 @@ return MaterialApp(
 ```
 
 - State
-  - Cubit
+
+Cubit
 ```dart
 class PostCubit extends Cubit<List<Post>> {
   final _dataService = DataService();
@@ -298,7 +299,7 @@ class PostCubit extends Cubit<List<Post>> {
   }
 }
 ```
-  - Bloc
+Bloc
 ```dart
 //event
 abstract class PostEvent{}
@@ -346,7 +347,8 @@ class PostBloc extends Bloc<PostEvent, PostState>{
 
 ```
 - Builder
-  - Cubit
+
+Cubit
 ```dart
 body: BlocBuilder<PostCubit, List<Post>>(builder: (context, res) {
     if (res.isEmpty) {
@@ -363,7 +365,7 @@ body: BlocBuilder<PostCubit, List<Post>>(builder: (context, res) {
         });
   }),
 ```
-  - Bloc
+Bloc
 ```dart
 body: BlocBuilder<PostBloc, PostState>(builder: (context, state) {
     if (state is LoadingPostState) {
