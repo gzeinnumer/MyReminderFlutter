@@ -106,12 +106,12 @@ BoardTile(tileDimension: tileDimension, onPressed: (){},),
 
 #### CHUNK Make New List From List
 
-```
+```dart
 [1,2,3,4,5,6]
 to
 [ [1,2,3] , [4,5,6] ]
 ```
-```
+```dart
 import 'dart:math';
 
 List<List<TileState>> chunk(List<TileState> list, int size) {
@@ -168,7 +168,7 @@ Row(
 )
 ```
 #### Match Parent
-```
+```dart
 SizedBox(
     width: double.infinity, //match parent
     child: Text('Login'),
@@ -205,7 +205,7 @@ class TemperatureInfo{
 ```
 
 #### LisView Flutter
-```
+```dart
 return ListView.builder(itemBuilder: (context, index) {
   return Card(
     child: ListTile(
@@ -230,7 +230,7 @@ class PostCubit extends Cubit<List<Post>> {
   }
 }
 ```
-```
+```dart
 body: BlocBuilder<PostCubit, List<Post>>(builder: (context, res) {
     if (res.isEmpty) {
       return const Center(child: CircularProgressIndicator());
