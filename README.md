@@ -471,6 +471,229 @@ class ExampleBloc extends Bloc<ExampleEvent, PostState> {
   }
 }
 ```
+#
+#### Flutter Dialog Disable Outside
+```dart
+showDialog(
+  barrierDismissible: false,
+  builder: ...
+);
+```
+#
+#### FLutter CallBack
+```dart
+final Function()? onPositivePressed;
+final ValueChanged<String>? onChanged;
+```
+#
+#### Flutter Container Radius
+```dart
+Container(
+    width: match_parent,
+    decoration : BoxDecoration(
+        color: Colors.white,
+        borderRadius: new BorderRadius.circular(def_margin)
+    ),
+    margin: const EdgeInsets.all(def_margin),
+    child: PaddingAll(
+        child: Column(
+            children: [
+                ...
+            ],
+        ),
+    ),
+),
+```
+#
+#### Flutter Layout Weight
+```dart
+return Scaffold(
+  appBar: EmptyAppBar(),
+  body: Stack(
+    children: [
+      BackgroundType4(),
+      Container(
+        child: Column(
+          children: [
+            Expanded(child: Container(color: Colors.red,)),
+            Expanded(child: Container(color: Colors.blue,)),
+          ],
+        ),
+      ),
+    ],
+  ),
+);
+```
+#
+#### Flutter Row Center
+```dart
+Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: []
+)
+```
+#
+#### Flutter List
+```dart
+List<T> datas = List<T>.empty(growable: true);
+json['datas'].forEach((v) {
+    datas.add(create(v));
+});
+```
+#
+#### Flutter Items Generator
+```dart
+final List<MyModel>? product_desc;
+
+List<Widget> get items => itemGenerator(product_desc!);
+
+List<Widget> itemGenerator(List<MyModel> data){
+    List<Widget> d = List<Widget>.empty(growable: true);
+    for(var i=0; i<data.length; i++){
+      d.add(Text(data[i].description.toString()));
+    }
+    return d;
+}
+```
+```dart
+List<String> list = ['one', 'two', 'three', 'four'];
+List<Widget> widgets = list.map((name) => new Text(name)).toList();
+```
+```dart
+var list = ["one", "two", "three", "four"];
+
+child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+        for(var item in list ) Text(item)
+    ],
+),
+```
+```
+https://stackoverflow.com/questions/50441168/iterating-through-a-list-to-render-multiple-widgets-in-flutter
+```
+#
+#### Flutter Generate From Current Value
+```dart
+String get freeDeliveryString => freeDelivery(subTotal);
+
+String freeDelivery(subTotal){
+    if(subTotal >= 30){
+        return "You have FREE Delivery";
+    } else{
+        double missing = 30.0-subTotal;
+        return "Add \$${missing.toStringAsFixed(2)} for FREE Delivery";
+    }
+}
+```
+#
+#### Flutter Generate Widget Array
+```dart
+var list = ["one", "two", "three", "four"];
+
+@override
+Widget build(BuildContext context) {
+    return new MaterialApp(
+        home: new Scaffold(
+            appBar: new AppBar(
+                title: new Text('List Test'),
+            ),
+            body: new Center(
+                child: new Column( // Or Row or whatever :),
+                children: createChildrenTexts(),
+            ),
+        ),
+    );
+}
+
+List<Text> createChildrenTexts() {
+    /// Method 1
+    List<Text> childrenTexts = List<Text>();
+    for (String name in list) {
+        childrenTexts.add(new Text(name, style: new TextStyle(color: Colors.red),));
+    }
+    return childrenTexts;
+
+    /// Method 2
+    return list.map((text) => Text(text, style: TextStyle(color: Colors.blue),)).toList();
+}
+```
+#
+#### Flutter ListView.builder
+```dart
+Container(
+  child: ListView.builder(
+    shrinkWrap: true,
+    itemCount: items.length,
+    itemBuilder: (BuildContext context, int index){
+      return Container(
+        child: Text(
+          items[index]['property']
+        ),
+      );
+    },
+  ),
+);
+```
+#
+#### Flutter Statusbar Color
+
+Update Flutter 2.0 (Recommended):
+```dart
+AppBar(
+    backwardsCompatibility: true,
+    systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.white),
+)
+```
+Only Android (more flexibility):
+```dart
+SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.blue, // navigation bar color
+    statusBarColor: Colors.pink, // status bar color
+));
+```
+Both iOS and Android:
+```dart
+AppBar(
+    backgroundColor: Colors.red, // status bar color
+    brightness: Brightness.light, // status bar brightness
+)
+```
+#
+#### Flutter StatusBarColor NavigationColor Recomended
+```dart
+SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.white,
+    statusBarBrightness: Brightness.dark,
+    systemNavigationBarColor: Colors.white,
+    systemNavigationBarIconBrightness: Brightness.dark
+));
+```
+```dart
+AppBar(
+    backwardsCompatibility: true,
+    systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark,
+    ),
+)
+```
+#
+#### Flutter DebugBanner
+```dart
+MaterialApp(
+  debugShowCheckedModeBanner: false,
+)
+```
+#
+#### Flutter Update
+```
+flutter channel master
+flutter upgrade
+```
+
 
 
 ---
