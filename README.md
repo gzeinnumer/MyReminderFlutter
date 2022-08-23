@@ -540,6 +540,9 @@ json['datas'].forEach((v) {
     datas.add(create(v));
 });
 ```
+```dart
+final list = <Post>[];
+```
 #
 #### Flutter Items Generator
 ```dart
@@ -693,8 +696,328 @@ MaterialApp(
 flutter channel master
 flutter upgrade
 ```
+#
+#### Callback View FLutter
+```dart
+class UsersView extends StatelessWidget {
+  final _users = ["Kyle", "Andriana", "Andrew"];
 
+  final ValueChanged didSelector;
 
+  UsersView({Key? key, required this.didSelector}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Users"),
+      ),
+      body: ListView.builder(
+            ...
+                onTap: () => didSelector(user),
+            ...
+          }),
+    );
+  }
+}
+```
+```dart
+class _MyAppState extends State<MyApp> {
+  String? _selectedUser;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Navigator(
+        pages: [
+          MaterialPage(
+            child: UsersView(
+              didSelector: (user) {
+                setState(() {
+                  _selectedUser = user;
+                });
+              },
+            ),
+          ),
+          ...
+        ],
+        ...
+    );
+  }
+}
+```
+#### Flutter List
+```dart
+List<String> restaurans = ["McDonald\'s", "Pizza Hut", "Besto", "Geprek"];
+List<String> restaurans = [];
+```
+#### Flutter Chunk
+```dart
+[1,2,3,4,5,6]
+
+[[1,2,3],[4,5,6]]
+```
+```dart
+import 'dart:math';
+
+enum TileState { EMPTY, CROSS, CIRCLE }
+
+List<List<TileState>> chunk(List<TileState> list, int size) {
+  return List.generate(
+    (list.length / size).ceil(),
+    (index) => list.sublist(
+      index * size,
+       min(index * size + size, list.length),
+    ),
+  );
+}
+```
+```dart
+var _boardState = List.filled(9, TileState.EMPTY);
+```
+```dart
+child: Column(
+  children: chunk(_boardState, 3).asMap().entries.map((entry) {
+    final chunkIndex = entry.key;
+    final tileStateChunk = entry.value; //this is array //[[1,2,3]]
+
+    return Row(
+      children: tileStateChunk.asMap().entries.map((innerEnty) {
+        final innerIndex = innerEnty.key;
+        final tileState = innerEnty.value;
+        final tileIndex = (chunkIndex * 3) + innerIndex; //[[1]]
+
+        return Container();
+      }).toList(),
+    );
+  }).toList(),
+),
+```
+
+#### ToggleButton
+```dart
+List<bool> _selection = [true, false, false];
+```
+```dart
+ToggleButtons(
+  children: const [
+    Text('10%'),
+    Text('15%'),
+    Text('20%'),
+  ],
+  isSelected: _selection,
+  onPressed: updateSelection,
+),
+```
+```dart
+setState(() {
+  for (int i = 0; i < _selection.length; i++) {
+    _selection[i] = selectedIndex == i;
+  }
+});
+```
+
+#### Http
+```
+  Future<WeatherResponse> getWeather(String city) async {
+    //https://api.openweathermap.org/data/2.5/weather?q=Yucaipa&appid=0b4be60a8797e131f49efc402fbbc0ed
+
+    // final queryParameters = {"lat": "35", "lon":"139", "appid": "0b4be60a8797e131f49efc402fbbc0ed"};
+    final queryParameters = {
+      "q": city,
+      "appid": "0b4be60a8797e131f49efc402fbbc0ed",
+      "units": "imperial"
+    };
+
+    final uri = Uri.https(
+        "api.openweathermap.org", "/data/2.5/weather", queryParameters);
+
+    final response = await http.get(uri);
+
+    print(response.body);
+
+    final json = jsonDecode(response.body);
+    return WeatherResponse.fromJson(json);
+  }
+```
+
+#### Tabbar
+```
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 1,
+        child: Scaffold(
+          backgroundColor: Colors.white70,
+          appBar: AppBar(
+            bottom: const TabBar(
+              tabs: [
+                Text("List"),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              Container(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+```
+
+#### Flutter Add Bloc
+
+type 1
+```dart
+  home: MultiBlocProvider(
+    providers: [
+      BlocProvider<PostBloc>(create: (context) => PostBloc())
+    ],
+    child: PostView(),
+  ),
+```
+```dart
+  body: Builder(
+      builder: (context) {
+        context.read<PostBloc>().add(PostInitEvent());
+        return BlocBuilder<PostBloc, PostState>(builder: (context, state) {
+          ...
+          return Container();
+        });
+      },
+  ),
+```
+type 2
+```dart
+  home: MultiBlocProvider(
+    providers: [
+      BlocProvider<PostBloc>(create: (context) => PostBloc()..add(PostInitEvent()))
+    ],
+    child: PostView(),
+  ),
+```
+
+#### FLutter If Return View
+```dart
+  body: Builder(
+      builder: (context) {
+        //if
+        //for
+        //switch
+        return Container();
+      },
+  ),
+```
+#### FLutter Future Multi
+```
+///async function
+final response = await Future.wait([
+  _pokemonRepository.getPokemonInfo(value),
+  _pokemonRepository.getPokemonSpeciesInfo(value)
+]);
+final pokemonInfo = response[0] as PokemonInfoResponse;
+final pokemonSpeciesInfo = response[1] as PokemonSpeciesInfoResponse;
+```
+#### Flutter Color
+```dart
+backgroundColor: const Color(0xFFF2F2F2)
+```
+#### Flutter Layout Weight
+```
+child: Column(
+    children: [
+      Expanded(
+        flex: 0,
+        child: Container(),
+      ),
+      Expanded(
+        flex: 1,
+        child: SizedBox(
+          width: double.infinity,
+          child: Container(),
+        ),
+      )
+    ],
+),
+```
+#### FLutter OnClick
+```
+return GestureDetector(
+    onTap: () => BlocProvider.of<NavCubit>(context).showPokemonDetails(state.pokemonListing[index].id),
+    child: Container(),
+);
+```
+#### FLutter TextFormField
+```
+  Widget _passwordField() {
+    return TextFormField(
+      obscureText: true,
+      decoration: const InputDecoration(
+          icon: Icon(Icons.security), hintText: "Password"),
+      validator: (value) => null,
+    );
+  }
+```
+#### Flutter copyWith
+```
+class LoginState {
+  final String? username;
+  final String? password;
+
+  LoginState({this.username, this.password});
+
+  LoginState copyWith({
+    String? username,
+    String? password,
+  }) {
+    return LoginState(
+      username: username ?? this.username,
+      password: password ?? this.password,
+    );
+  }
+}
+```
+#### Flutter Future Delay
+```
+Future<void> login() async{
+    Future.delayed(const Duration(seconds: 3));
+}
+```
+#### Flutter Form Key
+```
+final _formKey = GlobalKey<FormState>();
+
+Widget _content() {
+    return Form(
+        key: _formKey,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+                TextFormField(
+                  validator: (value) => null,
+                )
+            ],
+          ),
+        ),
+    );
+}
+```
+```
+ElevatedButton(
+  onPressed: () {
+    if (_formKey.currentState!.validate()) {
+      context.read<LoginBloc>().add(LoginSubmittedEvent());
+    }
+  },
+  child: const Text('Login'),
+)
+```
 
 ---
 
