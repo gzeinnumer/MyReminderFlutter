@@ -18,10 +18,9 @@ EdgeInsets.symmetric(horizontal: 40)
 EdgeInsets.symmetric(vertical: 40)
 ```
 
+#
 #### Repository
-
 - [Source](https://pub.dev/documentation/flutter_bloc/latest/flutter_bloc/MultiRepositoryProvider-class.html)
-
 - Single
 ```dart
 return MaterialApp(
@@ -31,7 +30,6 @@ return MaterialApp(
   ),
 );
 ```
-
 - Multi
 ```dart
 return MaterialApp(
@@ -44,10 +42,9 @@ return MaterialApp(
 );
 ```
 
+#
 #### Bloc
-
 - [Source]()
-
 - Single
 ```dart
 return Scaffold(
@@ -59,7 +56,6 @@ return Scaffold(
   ),
 );
 ```
-
 - Multi
 ```dart
 return Scaffold(
@@ -76,6 +72,7 @@ return Scaffold(
 );
 ```
 
+#
 #### CallBack
 ```dart
 class BoardTile extends StatelessWidget {
@@ -104,6 +101,7 @@ class BoardTile extends StatelessWidget {
 BoardTile(tileDimension: tileDimension, onPressed: (){},),
 ```
 
+#
 #### CHUNK Make New List From List
 
 ```dart
@@ -125,6 +123,7 @@ List<List<TileState>> chunk(List<TileState> list, int size) {
 }
 ```
 
+#
 #### Future<String> HTTP ASYNC
 ```dart
 import 'package:http/http.dart' as http;
@@ -150,6 +149,7 @@ void _makeRequest() async {
 }
 ```
 
+#
 #### Column
 ```dart
 Column(
@@ -167,6 +167,8 @@ Row(
     ],
 )
 ```
+
+#
 #### Match Parent
 ```dart
 SizedBox(
@@ -175,6 +177,7 @@ SizedBox(
 ),
 ```
 
+#
 #### Refactor Value
 ```dart
 class WeatherResponse{
@@ -186,6 +189,7 @@ class WeatherResponse{
 }
 ```
 
+#
 #### Json Converter
 ```dart
 final tempInfoJson = json['main'];
@@ -204,6 +208,7 @@ class TemperatureInfo{
 }
 ```
 
+#
 #### LisView Flutter
 ```dart
 return ListView.builder(itemBuilder: (context, index) {
@@ -215,6 +220,7 @@ return ListView.builder(itemBuilder: (context, index) {
 });
 ```
 
+#
 #### Cubit
 ```dart
 BlocProvider<PostCubit>(create: (context) => PostCubit()..getPost())
@@ -247,11 +253,13 @@ body: BlocBuilder<PostCubit, List<Post>>(builder: (context, res) {
   }),
 ```
 
+#
 #### Exception
 ```dart
 throw Exception('failed log in');
 ```
 
+#
 #### Use Again Bloc add
 ```dart
 BlocProvider.of<PostBloc>(context).add(PullToRefreshEvent())
@@ -260,6 +268,7 @@ BlocProvider.of<PostBloc>(context).add(PullToRefreshEvent())
 context.read<PostBloc>().add(PullToRefreshEvent())
 ```
 
+#
 #### Cubit To Bloc - List
 - Provider
 
@@ -388,6 +397,7 @@ body: BlocBuilder<PostBloc, PostState>(builder: (context, state) {
 }),
 ```
 
+#
 #### State Bloc Style
 
 - Type 1
@@ -471,6 +481,7 @@ class ExampleBloc extends Bloc<ExampleEvent, PostState> {
   }
 }
 ```
+
 #
 #### Flutter Dialog Disable Outside
 ```dart
@@ -479,12 +490,14 @@ showDialog(
   builder: ...
 );
 ```
+
 #
 #### FLutter CallBack
 ```dart
 final Function()? onPositivePressed;
 final ValueChanged<String>? onChanged;
 ```
+
 #
 #### Flutter Container Radius
 ```dart
@@ -504,6 +517,7 @@ Container(
     ),
 ),
 ```
+
 #
 #### Flutter Layout Weight
 ```dart
@@ -524,6 +538,7 @@ return Scaffold(
   ),
 );
 ```
+
 #
 #### Flutter Row Center
 ```dart
@@ -532,6 +547,7 @@ Row(
     children: []
 )
 ```
+
 #
 #### Flutter List
 ```dart
@@ -543,6 +559,7 @@ json['datas'].forEach((v) {
 ```dart
 final list = <Post>[];
 ```
+
 #
 #### Flutter Items Generator
 ```dart
@@ -575,6 +592,7 @@ child: Column(
 ```
 https://stackoverflow.com/questions/50441168/iterating-through-a-list-to-render-multiple-widgets-in-flutter
 ```
+
 #
 #### Flutter Generate From Current Value
 ```dart
@@ -589,6 +607,7 @@ String freeDelivery(subTotal){
     }
 }
 ```
+
 #
 #### Flutter Generate Widget Array
 ```dart
@@ -621,6 +640,7 @@ List<Text> createChildrenTexts() {
     return list.map((text) => Text(text, style: TextStyle(color: Colors.blue),)).toList();
 }
 ```
+
 #
 #### Flutter ListView.builder
 ```dart
@@ -638,6 +658,7 @@ Container(
   ),
 );
 ```
+
 #
 #### Flutter Statusbar Color
 
@@ -662,6 +683,7 @@ AppBar(
     brightness: Brightness.light, // status bar brightness
 )
 ```
+
 #
 #### Flutter StatusBarColor NavigationColor Recomended
 ```dart
@@ -683,6 +705,7 @@ AppBar(
     ),
 )
 ```
+
 #
 #### Flutter DebugBanner
 ```dart
@@ -690,12 +713,14 @@ MaterialApp(
   debugShowCheckedModeBanner: false,
 )
 ```
+
 #
 #### Flutter Update
 ```
 flutter channel master
 flutter upgrade
 ```
+
 #
 #### Callback View FLutter
 ```dart
@@ -746,11 +771,15 @@ class _MyAppState extends State<MyApp> {
   }
 }
 ```
+
+#
 #### Flutter List
 ```dart
 List<String> restaurans = ["McDonald\'s", "Pizza Hut", "Besto", "Geprek"];
 List<String> restaurans = [];
 ```
+
+#
 #### Flutter Chunk
 ```dart
 [1,2,3,4,5,6]
@@ -794,6 +823,7 @@ child: Column(
 ),
 ```
 
+#
 #### ToggleButton
 ```dart
 List<bool> _selection = [true, false, false];
@@ -817,6 +847,7 @@ setState(() {
 });
 ```
 
+#
 #### Http
 ```
   Future<WeatherResponse> getWeather(String city) async {
@@ -841,6 +872,7 @@ setState(() {
   }
 ```
 
+#
 #### Tabbar
 ```
   @override
@@ -868,6 +900,7 @@ setState(() {
   }
 ```
 
+#
 #### Flutter Add Bloc
 
 type 1
@@ -900,6 +933,7 @@ type 2
   ),
 ```
 
+#
 #### FLutter If Return View
 ```dart
   body: Builder(
@@ -911,6 +945,8 @@ type 2
       },
   ),
 ```
+
+#
 #### FLutter Future Multi
 ```
 ///async function
@@ -921,10 +957,14 @@ final response = await Future.wait([
 final pokemonInfo = response[0] as PokemonInfoResponse;
 final pokemonSpeciesInfo = response[1] as PokemonSpeciesInfoResponse;
 ```
+
+#
 #### Flutter Color
 ```dart
 backgroundColor: const Color(0xFFF2F2F2)
 ```
+
+#
 #### Flutter Layout Weight
 ```
 child: Column(
@@ -943,6 +983,8 @@ child: Column(
     ],
 ),
 ```
+
+#
 #### FLutter OnClick
 ```
 return GestureDetector(
@@ -950,6 +992,8 @@ return GestureDetector(
     child: Container(),
 );
 ```
+
+#
 #### FLutter TextFormField
 ```
   Widget _passwordField() {
@@ -961,6 +1005,8 @@ return GestureDetector(
     );
   }
 ```
+
+#
 #### Flutter copyWith
 ```
 class LoginState {
@@ -980,12 +1026,16 @@ class LoginState {
   }
 }
 ```
+
+#
 #### Flutter Future Delay
 ```
 Future<void> login() async{
     Future.delayed(const Duration(seconds: 3));
 }
 ```
+
+#
 #### Flutter Form Key
 ```
 final _formKey = GlobalKey<FormState>();
