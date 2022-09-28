@@ -849,7 +849,7 @@ setState(() {
 
 #
 #### Http
-```
+```dart
   Future<WeatherResponse> getWeather(String city) async {
     //https://api.openweathermap.org/data/2.5/weather?q=Yucaipa&appid=0b4be60a8797e131f49efc402fbbc0ed
 
@@ -874,7 +874,7 @@ setState(() {
 
 #
 #### Tabbar
-```
+```dart
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -948,7 +948,7 @@ type 2
 
 #
 #### FLutter Future Multi
-```
+```dart
 ///async function
 final response = await Future.wait([
   _pokemonRepository.getPokemonInfo(value),
@@ -966,7 +966,7 @@ backgroundColor: const Color(0xFFF2F2F2)
 
 #
 #### Flutter Layout Weight
-```
+```dart
 child: Column(
     children: [
       Expanded(
@@ -986,7 +986,7 @@ child: Column(
 
 #
 #### FLutter OnClick
-```
+```dart
 return GestureDetector(
     onTap: () => BlocProvider.of<NavCubit>(context).showPokemonDetails(state.pokemonListing[index].id),
     child: Container(),
@@ -995,7 +995,7 @@ return GestureDetector(
 
 #
 #### FLutter TextFormField
-```
+```dart
   Widget _passwordField() {
     return TextFormField(
       obscureText: true,
@@ -1008,7 +1008,7 @@ return GestureDetector(
 
 #
 #### Flutter copyWith
-```
+```dart
 class LoginState {
   final String? username;
   final String? password;
@@ -1029,7 +1029,7 @@ class LoginState {
 
 #
 #### Flutter Future Delay
-```
+```dart
 Future<void> login() async{
     Future.delayed(const Duration(seconds: 3));
 }
@@ -1037,7 +1037,7 @@ Future<void> login() async{
 
 #
 #### Flutter Form Key
-```
+```dart
 final _formKey = GlobalKey<FormState>();
 
 Widget _content() {
@@ -1058,7 +1058,7 @@ Widget _content() {
     );
 }
 ```
-```
+```dart
 ElevatedButton(
   onPressed: () {
     if (_formKey.currentState!.validate()) {
@@ -1067,6 +1067,97 @@ ElevatedButton(
   },
   child: const Text('Login'),
 )
+```
+
+#
+#### Flutter Async In initState
+```dart
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(microseconds: 10), () {
+
+      initTimer();
+    });
+  }
+
+  void initTimer() async{
+    String date = await sharePreferencesManager.getString("date");
+    if(date.isEmpty){
+      await sharePreferencesManager.putString("date", DateTime.now().day.toString());
+    }
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) async {
+      DateTime now = DateTime.now();
+      // String _time = "${now.hour}:${now.minute}:${now.second}";
+      // if(_time=="0:0:1"){
+      //   _menuBloc.add(RefreshData());
+      // }
+      print(t.tick);
+      if(date!=DateTime.now().day.toString()){
+        await sharePreferencesManager.putString("date", DateTime.now().day.toString());
+
+        Platform.isAndroid ? showAlertDialogLogoutAndroid(context, sharePreferencesManager, "Session Anda expired \n Silahkan login lagi") : showAlertDialogLogoutIos(context, sharePreferencesManager, "Session Anda expired \n Silahkan login lagi");
+      }
+    });
+  }
+```
+
+#
+#### BaseResponseObject
+
+[Source](https://www.youtube.com/watch?v=wJnMhLLpAIo&ab_channel=PrieyudhaAkaditaS)
+```dart
+  T? data;
+
+  factory BaseResponseObject.fromJson(Map<String, dynamic> json, Function(Map<String, dynamic>) build) {
+    final status = json['status'];
+    final title = json['title'];
+    final message = json['message'];
+    final info = json['info'] != null ? Info.fromJson(json['info']) : null;
+
+    return BaseResponseObject<T>(
+      status: status,
+      title: title,
+      message: message,
+      info: info,
+      data: build(json['data'])
+    );
+  }
+```
+```dart
+      return BaseResponseObject<Examples>.fromJson(json.data, (data){
+        return Examples.fromJson(data);
+      });
+```
+
+#
+#### BaseResponseList
+
+[Source](https://www.youtube.com/watch?v=wJnMhLLpAIo&ab_channel=PrieyudhaAkaditaS)
+```dart
+  List<T>? data;
+
+  factory BaseResponseList.fromJson(Map<String, dynamic> json, Function(List<dynamic>) build) {
+    final status = json['status'];
+    final title = json['title'];
+    final message = json['message'];
+    final info = json['info'] != null ? Info.fromJson(json['info']) : null;
+
+    return BaseResponseList<T>(
+        status: status,
+        title: title,
+        message: message,
+        info: info,
+        data: build(json['data'])
+    );
+  }
+```
+```dart
+      return BaseResponseList.fromJson(json.data, (data){
+        List<Examples> list = data.map((e) => Examples.fromJson(e)).toList();
+        return list;
+      });
 ```
 
 ---
