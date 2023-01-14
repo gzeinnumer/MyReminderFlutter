@@ -1154,12 +1154,51 @@ ElevatedButton(
   }
 ```
 ```dart
-      return BaseResponseList.fromJson(json.data, (data){
-        List<Examples> list = data.map((e) => Examples.fromJson(e)).toList();
-        return list;
-      });
+return BaseResponseList.fromJson(json.data, (data){
+    List<Examples> list = data.map((e) => Examples.fromJson(e)).toList();
+    return list;
+});
 ```
 
+#
+#### Format
+```
+String _formatTime(DateTime dateTime) {
+    return DateFormat('hh:mm:ss').format(dateTime);
+}
+```
+
+#
+#### Wrap_content
+```dart
+Wrap(
+  children: [
+    Text('Do you want to remove item?'),
+    Text('Do you want to remove item?'),
+    Text('Do you want to remove item?'),
+  ],
+)
+```
+
+#
+#### Args
+```dart
+Navigator.of(context).pop('data');
+```
+```dart
+showDialog(
+  context: context,
+  builder: (context) => ExamplesDialog(),
+).then((value) {
+    print(value);
+});
+```
+
+#
+#### Pop
+```dart
+Navigator.of(context).pop(_editTextController.text);
+``
 ---
 
 ```
