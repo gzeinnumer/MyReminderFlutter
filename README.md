@@ -1199,6 +1199,75 @@ showDialog(
 ```dart
 Navigator.of(context).pop(_editTextController.text);
 ``
+
+#
+#### Navigator
+```dart
+Navigator.pushNamed(context, NotificationDetailView.TAG, arguments : data);
+```
+```dart
+class AppRouter {
+  static Route<dynamic> generateRoute(RouteSettings routeSettings) {
+    switch (routeSettings.name) {
+      case NotificationDetailView.TAG:
+        final args = routeSettings.arguments as NotificationResponse;
+        return MaterialPageRoute(builder: (_) => NotificationDetailView(args));
+    }
+  }
+}
+```
+
+#
+#### WillPopScope
+
+[Source](https://blog.logrocket.com/using-willpopscope-flutter-android-navigation/)
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        myprint("konfrmasi dulu sebepum acc");
+        BlocProvider.of<NotificationBloc>(context).add(NotificationInitEvent());
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Notifikasi"),
+        ),
+        body: Container(),
+      ),
+    );
+  }
+```
+```dart
+Navigator.pushNamed(
+  context,
+  NotificationDetailView.TAG,
+  arguments: c.data.data![index],
+).then((value) => setState(() {
+  BlocProvider.of<NotificationBloc>(context).add(NotificationInitEvent());
+}));
+```
+```dart
+Navigator.pushNamed(
+  context,
+  NotificationDetailView.TAG,
+  arguments: c.data.data![index],
+).then((value) {
+  BlocProvider.of<NotificationBloc>(context).add(NotificationInitEvent());
+});
+```
+
+#
+#### Base Style Theme
+```dart
+Theme.of(context).copyWith(splashColor: Colors.yellow);
+```
+```dart
+Theme.of(context).primarySwatch;
+```
+
 ---
 
 ```
