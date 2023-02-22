@@ -1268,6 +1268,143 @@ Theme.of(context).copyWith(splashColor: Colors.yellow);
 Theme.of(context).primarySwatch;
 ```
 
+#
+#### Base Dialog Setting
+```dart
+showDialog(
+  context: context,
+  builder: (context) => PhotoPickerDialog(),
+).then((value) {
+  if (value == null) return;
+});
+```
+
+```dart
+import 'package:flutter/material.dart';
+
+class PhotoPickerDialog extends StatelessWidget {
+
+  PhotoPickerDialog({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.transparent,
+      contentPadding: EdgeInsets.zero,
+      elevation: 0.0,
+      content: _body(context),
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                child: Column(
+                  children: [
+                    Text('Photo Picker'),
+                    Text('Photo Picker'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+```
+
+<img src="/preview/preview1.png" width="300">
+
+For ScrollView
+```dart
+// ignore_for_file: must_be_immutable
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
+class PhotoPickerDialog extends StatefulWidget {
+
+  PhotoPickerDialog({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<PhotoPickerDialog> createState() => _PhotoPickerDialogState();
+}
+
+class _PhotoPickerDialogState extends State<PhotoPickerDialog> {
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.transparent,
+      contentPadding: EdgeInsets.zero,
+      elevation: 0.0,
+      content: _body(context),
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    return Flex(
+      direction: Axis.horizontal,
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(widget.labelPhotoPicker),
+                      Text(widget.labelPhotoPicker),
+                      Text(widget.labelPhotoPicker),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+```
+
+#
+#### Flutter Image Assets
+```
+flutter:
+  assets:
+    - assets/imgs/
+```
+
+<img src="/preview/preview2.png" width="300">
+
 ---
 
 ```
