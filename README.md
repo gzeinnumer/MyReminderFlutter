@@ -1405,6 +1405,16 @@ flutter:
 
 <img src="/preview/preview2.png" width="300">
 
+#
+#### Try Catch
+```dart
+try {
+  throw 42;
+} on Exception catch (_) {
+  print('never reached');
+}
+```
+
 ---
 
 ```
